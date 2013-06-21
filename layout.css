@@ -1,0 +1,41 @@
+
+label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 250px;
+    text-align: left;
+    font-size: larger;
+}
+#longBoneSelections{
+    
+    text-indent: each-line;
+    
+    text-indent: 20px;
+    text-align: left;
+}
+
+input {
+  display: inline-block;
+  text-align: right ;
+  
+}
+
+table {
+    width: 75%;
+}
+
+
+td {
+    width: 50%;
+    border-width: thick;
+    border-color: #000;
+    border-style: double ;
+    
+}
+
+select {
+    text-align: right ;
+    
+    
+}
