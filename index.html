@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Evaluate Small Round Blue Cell Tumors</title>
+        <link rel="stylesheet" type="text/css" href="layout.css">
+        
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    </head>
+    <body>
+        <h1>Evaluation of small round blue cell tumors</h1>
+        
+   <table style="width=75%">
+
+   <tr>
+      <td valign="top">
+         
+        <label>Gender:</label>  
+                 <select name="optionMenu">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>   
+                    </select>  <br />
+        <label>Race:</label>  
+                 <select name="optionMenu">
+                    <option value="male">White</option>
+                    <option value="female">Black</option>   
+                    <option value="Hispanic">Hispanic</option>
+                    <option value="Asian">Asian</option>
+
+                    </select>  <br />
+        <label>Age:</label>  
+                 <select name="optionMenu">
+                    <option value="lessthan1yr">Less than 1 year</option>
+                    <option value="1to10yr">1 to 10 years</option>   
+                    <option value="10to30yr">10 to 30 years</option>
+                    <option value="30to70yr">30 to 70 years</option>
+                    <option value="greaterthan70yr">>70 years</option>
+                    </select>  <br />
+
+        <label>Bone location:</label>  
+                 <select name="optionMenu" id="locationTumor">
+                    <option value="empty"></option>
+                    <option value="longBone">Long bone</option>
+                    <option value="axial">Axial</option> 
+                    <option value="skull">Skull</option>   
+                    </select>  <br />
+
+             <div id="longBoneSelections" style="display: none" style="margin-left: 20%">
+             
+              <label>Specific bone affected:</label>
+               <select name="specificBoneMenu" style="text-align: right">
+                    
+                    <option value="Humerous">Humerous</option>  
+                    <option value="Forearm">Forearm</option>  
+                    <option value="Femur">Femur</option>
+                    <option value="Tibia">Tibia</option>   
+                    </select>  <br>
+             
+              <label>Location of bone affected:</label>
+                <select name="specificBoneMenu" style="text-align: right">
+                    
+                    <option value="proximalEpiphysis">Proximal Epiphysis</option>  
+                    <option value="metaphysis">Metaphysis</option>  
+                    <option value="diaphysis">Diaphysis</option>
+                    <option value="distalEpiphysis">Distal Epiphysis</option>   
+                    </select>  <br />
+                 
+                     
+             <label>Portion of bone with tumor:</label>  
+                 <select name="specificBoneMenu">
+                    <option value="cortical">Cortical</option>
+                    <option value="medullary">Medullary</option>   
+                    </select>  <br />
+                       
+             </div>
+        
+              <label>Radiology:</label>  
+                 <select name="optionMenu">
+                    <option value="groundGlass">Ground Glass</option>
+                    <option value="sunburst">Sunburst</option> 
+                    <option value="cystic">Cystic lesions</option> 
+                    <option value="bubbly">Bubbly</option> 
+                      
+                    </select>  <br />
+
+            <label>Histology - select all that apply:</label>  <br /> 
+                 <select id="histology" size="5" multiple >
+                    <option value="smallRoundBlue">Small round blue</option>
+                    <option value="spindledCells">Spindled cells</option>   
+                    <option value="smudgeCells">Smudge cells</option>
+                    <option value=" highMitoses">Rhabdoid appearance</option>
+                    <option value=" cohesive">Cohesive</option>
+                    <option value=" discohesive">Discohesive</option>
+                    <option value=" necrosisPresent">Necrosis present</option>
+                    <option value=" highMitoses">Rosettes</option>
+                    <option value=" noMitoses">No mitotic figures seen.</option>
+                    <option value=" mediumMitoses">Medium mitotic activity</option>
+                    <option value=" highMitoses">Highly mitotic</option>
+                    </select>  <br />
+      
+      </td>
+       <td valign="top">
+       
+           <div style="border-style: double" style="width: fill-available">
+           // image box 
+           
+           </div>
+           
+
+       
+
+
+       </td>
+       </tr>
+   </table> 
+        <input type="button" value="Confirm" id="confirmEntry">
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="script.js"></script>
+    
+    </body>
+</html>
