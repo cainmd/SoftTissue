@@ -1,12 +1,12 @@
 var longBoneSelections = document.getElementById("longBoneSelections");
 var histology = document.getElementById("histology");
 var menus = document.getElementsByName("optionMenu");
-var specificLocation = document.getElementsByName("specificBoneMenu");
+var specificLocation = document.getElementsByName("longBoneMenu");
 
 var confirm = document.getElementById("confirmEntry");
 
 var locationTumor = document.getElementById("locationTumor");
-var LC = locationTumor.options[locationTumor.selectedIndex].value;
+//var LC = locationTumor.options[locationTumor.selectedIndex].value;
 
 var tumor;
 
@@ -16,21 +16,56 @@ var tumor;
 
 
 $(document).ready(function () {
-    $("#locationTumor").change(function () {
-        var tumorSelection = $("#locationTumor").val()
+    $('#STorBone').change(function () {
+        var orgType = $("#STorBone").val()
+
+        if (orgType == "softTissue") {
+
+            $("#softTissueSelected").show();
+            $('#boneSelected').hide();
+        }
+        else if (orgType == "bone") {
+            $("#softTissueSelected").hide();
+            $("#boneSelected").show();
+        };
+
+
+    });
+
+        $('#boneSelected').change(function () {
+        var boneType = $("#axialOrappendicular").val()
+      
+
+        if (boneType == "axial") {
+
+            $("#axialSelected").show();
+            $('#appendicularSelected').hide();
+        }
+        else if (boneType == "appendicular") {
+          
+            $("#axialSelected").hide();
+            $("#appendicularSelected").show();
+        };
+
+
+    });
+
+    $("#appendicularLocation").change(function () {
+        var tumorSelection = $("#appendicularLocation").val()
+
         if (tumorSelection == "longBone") {
 
             $("#longBoneSelections").show();
         }
         else {
             $("#longBoneSelections").hide();
-        }
+        };
 
     });
 
     $("#confirmEntry").click(function () {
         tumor = new newTumor();
-        
+
     });
 
 });
