@@ -19,11 +19,13 @@
          
         <label>Gender:</label>  
                  <select name="optionMenu">
+                    <option value="empty"> </option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>   
                     </select>  <br />
         <label>Race:</label>  
                  <select name="optionMenu">
+                    <option value="empty"> </option>
                     <option value="male">White</option>
                     <option value="female">Black</option>   
                     <option value="Hispanic">Hispanic</option>
@@ -32,26 +34,66 @@
                     </select>  <br />
         <label>Age:</label>  
                  <select name="optionMenu">
+                    <option value="empty"> </option>
                     <option value="lessthan1yr">Less than 1 year</option>
                     <option value="1to10yr">1 to 10 years</option>   
                     <option value="10to30yr">10 to 30 years</option>
-                    <option value="30to70yr">30 to 70 years</option>
-                    <option value="greaterthan70yr">>70 years</option>
+                    <option value="30to60yr">30 to 60 years</option>
+                    <option value="greaterthan60yr">>60 years</option>
                     </select>  <br />
+        
+          <label>Select type of tissue</label>
+          <select id="STorBone">
+            <option value="empty"> </option>
+            <option value="softTissue">Soft Tissue</option>
+            <option value="bone">Bone</option>
+          </select> <br/>
+          
+     <div id="softTissueSelected" style="display: none">
+          
+     </div>
 
-        <label>Bone location:</label>  
-                 <select name="optionMenu" id="locationTumor">
+ <div id="boneSelected" style="display: none">
+          <label>Location</label>
+            <select id="axialOrappendicular">
+                <option value="empty"> </option>
+                <option value="axial">Axial</option>
+                <option value="appendicular">Appendicular</option>
+            </select> </br>
+
+    <div id="axialSelected" style=" display: none ">
+        <label>Select axial location:</label>
+            <select name="axialLocation">
+                <option value="empty"> </option>
+                <option value="skull">Skull</option>
+                <option value="vertebralColumn">Vertebral Column</option>
+                <option value="pelvis">Pelvis</option>
+            
+            </select>
+    
+    
+    
+    </div>
+
+
+    <div id="appendicularSelected" style=" display: none"  >      
+             <label>Bone location:</label>  
+                 <select name="optionMenu" id="appendicularLocation">
                     <option value="empty"></option>
                     <option value="longBone">Long bone</option>
-                    <option value="axial">Axial</option> 
-                    <option value="skull">Skull</option>   
+                    <option value="axial">Short bone</option> 
+                    <option value="skull">Flat bone</option>
+                    <option value="skull">Irregular bone</option>
+                    <option value="skull">Sesamoid bone</option>
+                                
                     </select>  <br />
+    </div>
 
-             <div id="longBoneSelections" style="display: none" style="margin-left: 20%">
+    <div id="longBoneSelections" style="display: none">
              
               <label>Specific bone affected:</label>
-               <select name="specificBoneMenu" style="text-align: right">
-                    
+               <select name="longBoneMenu" style="text-align: right">
+                    <option value="empty"> </option>
                     <option value="Humerous">Humerous</option>  
                     <option value="Forearm">Forearm</option>  
                     <option value="Femur">Femur</option>
@@ -59,47 +101,73 @@
                     </select>  <br>
              
               <label>Location of bone affected:</label>
-                <select name="specificBoneMenu" style="text-align: right">
-                    
-                    <option value="proximalEpiphysis">Proximal Epiphysis</option>  
+                <select name="longBoneMenu" style="text-align: right">
+                    <option value="empty"> </option>
+                    <option value="proximalEpiphysis">Epiphysis</option>  
                     <option value="metaphysis">Metaphysis</option>  
                     <option value="diaphysis">Diaphysis</option>
-                    <option value="distalEpiphysis">Distal Epiphysis</option>   
+                    
                     </select>  <br />
                  
                      
              <label>Portion of bone with tumor:</label>  
-                 <select name="specificBoneMenu">
+                 <select id="longBoneMenu">
+                    <option value="empty"> </option>
                     <option value="cortical">Cortical</option>
                     <option value="medullary">Medullary</option>   
                     </select>  <br />
                        
-             </div>
-        
+       </div>
+
+       <div id="shortBoneSelections" style="display: none">
+             
+              <label>Specific bone affected:</label>
+               <select id="shortBoneAffected" style="text-align: right">
+                    <option value="empty"> </option>
+                    <option value="Humerous">Wrist</option>  
+                    <option value="Forearm">Ankle</option>  
+                       
+                    </select>  <br>
+
+       </div>
+</div>
+
               <label>Radiology:</label>  
                  <select name="optionMenu">
-                    <option value="groundGlass">Ground Glass</option>
+                    <option value="empty"> </option>
+                    <option value="sclerotic">Sclerotic</option>
                     <option value="sunburst">Sunburst</option> 
-                    <option value="cystic">Cystic lesions</option> 
-                    <option value="bubbly">Bubbly</option> 
-                      
+                    <option value="cystic">Cystic</option> 
+                                         
                     </select>  <br />
 
-            <label>Histology - select all that apply:</label>  <br /> 
+            <label>Additional histologic features - select all that apply:</label>  <br /> 
                  <select id="histology" size="5" multiple >
-                    <option value="smallRoundBlue">Small round blue</option>
+                    
                     <option value="spindledCells">Spindled cells</option>   
                     <option value="smudgeCells">Smudge cells</option>
-                    <option value=" highMitoses">Rhabdoid appearance</option>
-                    <option value=" cohesive">Cohesive</option>
-                    <option value=" discohesive">Discohesive</option>
-                    <option value=" necrosisPresent">Necrosis present</option>
-                    <option value=" highMitoses">Rosettes</option>
-                    <option value=" noMitoses">No mitotic figures seen.</option>
-                    <option value=" mediumMitoses">Medium mitotic activity</option>
-                    <option value=" highMitoses">Highly mitotic</option>
+                    <option value="rhabdoid">Rhabdoid appearance</option>
+                    <option value="desmoplastic">Desmoplastic response</option>
+                    <option value="saltandpepper">Salt and pepper chromatin</option>
+                    <option value="necrosisPresent">Necrosis present</option>
+                    <option value="rosettes">Rosettes</option>
+                    <option value="sclerosis">Sclerosis</option>
+                  
                     </select>  <br />
-      
+            <label>Cohesiveness:</label>
+                <select id="cohesiveness">
+                    <option value="discohesive">Discohesive</option>
+                    <option value="looseCohesive">Loosely cohesive</option>
+                    <option value="cohesive">Cohesive</option>
+                </select> <br/>
+
+            <label>Mitotic rate:</label>
+                <select id="mitoticRate">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+
       </td>
        <td valign="top">
        
