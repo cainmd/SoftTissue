@@ -63,7 +63,7 @@ var ewing = {
 var osteosarcoma = {
     
     name: "Osteosarcoma",
-    positiveStains: [, "Vimentin - 90%", "Osteocalcin - 80%", "SMA"],
+    positiveStains: ["Vimentin - 90%", "Osteocalcin - 80%", "SMA"],
     negativeStains: ["CD45 - 0%"],
     variableStains: ["Cytokeratin - 7%", "CD99 - 20%"],
     age: [10, 30],
