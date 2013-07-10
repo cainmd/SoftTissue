@@ -59,7 +59,7 @@
             <select name="axialLocation">
                 <option value="empty"> </option>
                 <option value="skull">Skull</option>
-                <option value="vertebralColumn">Vertebral Column</option>
+                <option value="vertebrae">Vertebral Column</option>
                 <option value="pelvis">Pelvis</option>
             
             </select>
@@ -74,10 +74,10 @@
                  <select name="optionMenu" id="appendicularLocation">
                     <option value="empty"></option>
                     <option value="longBone">Long bone</option>
-                    <option value="axial">Short bone</option> 
-                    <option value="skull">Flat bone</option>
-                    <option value="skull">Irregular bone</option>
-                    <option value="skull">Sesamoid bone</option>
+                    <option value="shortBone">Short bone</option> 
+                    <option value="flatBone">Flat bone</option>
+                    <option value="irregularBone">Irregular bone</option>
+                    <option value="sesamoidBone">Sesamoid bone</option>
                                 
                     </select>  <br />
     </div>
@@ -128,12 +128,13 @@
               <label>Radiology:</label>  
                  <select id ="radiology">
                     <option value="empty">None</option>
+                    <option value="lytic">Lytic</option>
                     <option value="sclerotic">Sclerotic</option>
                     <option value="sunburst">Sunburst</option> 
                     <option value="cystic">Cystic</option> 
                     <option value="periostealElevation">Peri-osteal Elevation</option>     
                     <option value="moth-eaten">Moth-eaten</option>
-                    <option value="onionskin">Onion-skinning</option>                
+                    <option value="onionskinning">Onion-skinning</option>                
                     </select>  <br />
 
             <label>Gross description of tumor</label> <br/>
@@ -158,13 +159,13 @@
             <label>Additional histologic features - select all that apply:</label>  <br /> 
                  <select id="histology" size="5" multiple >
                     
-                    <option value="spindledCells">Spindled cells</option>   
+                    <option value="spindleCells">Spindle cells</option>   
                     <option value="smudgeCells">Smudge cells</option>
                     <option value="crushArtifact">Crush artifact</optoin>
                     <option value="rhabdoid">Rhabdoid appearance</option>
                     <option value="desmoplastic">Desmoplastic response</option>
-                    <option value="saltandpepper">Salt and pepper chromatin</option>
-                    <option value="necrosisPresent">Necrosis present</option>
+                    <option value="saltAndpepper">Salt and pepper chromatin</option>
+                    <option value="necrosis">Necrosis present</option>
                     <option value="rosettes">Rosettes</option>
                     <option value="sclerosis">Sclerosis</option>
                     <option value="boneFormation">Bone formation</option>
