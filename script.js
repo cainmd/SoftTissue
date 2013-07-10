@@ -300,15 +300,17 @@ function newTumor (histology, grossDescription) {
          if (tumor.age != "empty" && tumor.age > tumorSet[i].age[0] && tumor.age < tumorSet[i].age[1]) { tumorSet[i].score = tumorSet[i].score + 1; };
          if (tumor.gender != "empty" && tumorSet[i].gender == "both" || tumor.gender == tumorSet[i].gender) { tumorSet[i].score = tumorSet[i].score + 1; };
          if (tumor.race != "empty" && tumorSet[i].race == "all" || inArray(tumorSet[i].race, tumor.race)) { tumorSet[i].score = tumorSet[i].score + 1; };
+         if (tumorSet[i].cohesiveness == tumor.cohesiveness) { tumorSet[i].score = tumorSet[i].score + 1; };
 
          //   if (inArray(tumorSet[i].gross, tumor.gross)) { tumorSet[i].score = tumorSet[i].score + 1; };
          //may want to have additional points if number one in list
 
-         if (inArray(tumorSet[i].radiology, tumor.radiology)) { 
-                if (inArray(tumorSet[i].buzzword, tumor.radiology)) {
-                     tumorSet[i].score = tumorSet[i].score + 200;
-                 };
-         tumorSet[i].score = tumorSet[i].score + 1; };
+         if (inArray(tumorSet[i].radiology, tumor.radiology)) {
+             if (inArray(tumorSet[i].buzzword, tumor.radiology)) {
+                 tumorSet[i].score = tumorSet[i].score + 200;
+             };
+             tumorSet[i].score = tumorSet[i].score + 1;
+         };
 
          //inArray(tumorSet[i].histology,tumor.histology[0])
          //need to correct this
@@ -320,9 +322,9 @@ function newTumor (histology, grossDescription) {
          for (var k = 0; k < tumor.histology.length; k++) {
 
              if (inArray(tumorSet[i].histology, tumor.histology[k])) { tumorSet[i].score = tumorSet[i].score + 1; };
-                if (inArray(tumorSet[i].buzzword, tumor.histology[k])) {
-                     tumorSet[i].score = tumorSet[i].score + 200;
-                 };
+             if (inArray(tumorSet[i].buzzword, tumor.histology[k])) {
+                 tumorSet[i].score = tumorSet[i].score + 200;
+             };
 
 
          };
