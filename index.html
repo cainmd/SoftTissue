@@ -43,8 +43,17 @@
           </select> <br/>
           
      <div id="softTissueSelected" style="display: none">
-          
+         <label>Soft-tissue site:</label> 
+            <select id="softtissueSite">
+                <option value="empty"> </option>
+                <option value="headAndneck">Head and neck</option>
+                <option value="upperExtremity">Upper Extremity</option>
+                <option value="lowerExtremeity">Lower Extremity</option>
+            </select>
+         </br>
      </div>
+
+
 
  <div id="boneSelected" style="display: none">
           <label>Location</label>
@@ -139,12 +148,12 @@
 
             <label>Gross description of tumor</label> <br/>
                 <select id="grossDescription" size="5" multiple>
-                    <option value="sclerotic">Circumscribed</option>
-                    <option value="sunburst">Poorly defined</option> 
+                    <option value="circumscribed">Circumscribed</option>
+                    <option value="poorlyDefined">Poorly defined</option> 
                     <option value="soft">Soft</option>
                     <option value="firm">Firm</option>
                     <option value="necrotic">Necrotic</option>
-                    <option value="cystic">Hemorrhagic</option> 
+                    <option value="hemorrhagic">Hemorrhagic</option> 
                     <option value="fleshy">Fleshy</option>
                     <option value="grey">Grey</option> 
                     <option value="red">Red</option> 
@@ -163,7 +172,7 @@
                     <option value="smudgeCells">Smudge cells</option>
                     <option value="crushArtifact">Crush artifact</optoin>
                     <option value="rhabdoid">Rhabdoid appearance</option>
-                    <option value="desmoplastic">Desmoplastic response</option>
+                    <option value="pleomorphic">Pleomorphic cells</option>
                     <option value="saltAndpepper">Salt and pepper chromatin</option>
                     <option value="necrosis">Necrosis present</option>
                     <option value="rosettes">Rosettes</option>
@@ -175,7 +184,8 @@
                     <option value="lymphocytes">Lymphocytes</option> 
                     <option value="plasmaCells">Plasma cells</option> 
                     <option value="fineChromatin">Fine chromatin</option>
-                    <option value="cartilageFormation">Cartilage Forming</option>                  
+                    <option value="cartilageFormation">Cartilage Forming</option> 
+                    <option value="mucoid">Mucinous/myxoid</option>                 
                     </select>  <br />
 
             <label>Cohesiveness:</label>
