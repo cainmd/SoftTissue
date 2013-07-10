@@ -1,5 +1,5 @@
 var longBoneSelections = document.getElementById("longBoneSelections");
-var histology = document.getElementById("histology");
+
 var menus = document.getElementsByName("optionMenu");
 //gender, race, age
 var age = document.getElementById("age");
@@ -20,15 +20,18 @@ var longBoneMenu = document.getElementsByName("longBoneMenu");
 var radiology = document .getElementById("radiology")
 var shortBoneAffected = document.getElementById("shortBoneAffected");
 
-var grossDescription = document.getElementById("grossDescription");
-var histology = document.getElementById("histology");
+//var grossDescription = document.getElementById("grossDescription");
+//var histology = document.getElementById("histology");
 
 var cohesiveness = document.getElementById("cohesiveness");
 var mitoticRate = document.getElementById("mitoticRate");
 
 var confirm = document.getElementById("confirmEntry");
 
-
+//var selectedHistology = [];
+var histologyArray = [];
+var grossArray = [];
+//document.getElementById("histology");
 //var LC = locationTumor.options[locationTumor.selectedIndex].value;
 
 var tumor;
@@ -48,13 +51,15 @@ var ewing = {
     specificSite: ["femur","humerous", "pelvis", "ribs"],
     boneLocation: ["diaphysis", "metaphysis"],
     cORm : "both",
-    radiology: ["onion-skinning", "moth-eaten", "lytic"],
+    radiology: ["onionskinning", "moth-eaten", "lytic"],
     gross: ["tan-grey", "necrotic"],
-    histology: ["fine chromatin", "necrosis", "rosettes"],
+    histology: ["fineChromatin", "necrosis", "rosettes"],
     mitoses: "variable",
     cohesiveness: "variable",
-
+    buzzword: ["onionskinning"],
+    removeDiagnosis: [],
     score: 0
+
 
     //associated soft tissue involvement
 };
@@ -75,10 +80,11 @@ var osteosarcoma = {
     cORm : "medullary",
     radiology: ["Peri-osteal elevation", "moth-eaten", "lytic"],
     gross: ["tan-grey", "flesh", "cartilagenous", "sclerotic"],
-    histology: ["boneForming", "spindleCell", "pleomorphic", "cartilageFormation"],
+    histology: ["boneFormation", "spindleCells", "pleomorphic", "cartilageFormation"],
     mitoses: "highlyMitotic",
     cohesiveness: "variable",
-
+    buzzword: ["boneFormation","cartilageFormation"],
+    removeDiagnosis: [],
     score: 0
     //account for bimodal age...
 }
@@ -98,10 +104,12 @@ var langerhansHistiocytosis = {
     boneLocation: [""],
     cORm : "N/A",
     radiology: ["lytic"],
-    gross: ["soft", "red"],
+    gross: ["soft", "red", "necrotic"],
     histology: ["eosinophils", "macrophages", "lymphocytes", "necrosis"],
     mitoses: "variable",
     cohesiveness: "variable",
+    buzzword: ["eosinophils"],
+    removeDiagnosis: [],
     score: 0
 
 }
@@ -125,7 +133,8 @@ var myeloma = {
     histology: ["plasmaCells"],
     mitoses: "rare",
     cohesiveness: "discohesive",
-    
+    buzzword: [],
+    removeDiagnosis: ["age"],
     score: 0
 }
 
@@ -148,7 +157,8 @@ var lymphoma = {
     histology: ["lymphocytes", "crushArtifact", "smudgeCells", "plasmaCells", "eosinophils"],
     mitoses: "variable",
     cohesiveness: "discohesive",
-
+    buzzword: [],
+    removeDiagnosis: [],
     score: 0
 }
 
@@ -201,15 +211,40 @@ $(document).ready(function () {
     });
 
     $("#confirmEntry").click(function () {
-        tumor = new newTumor();
+        $("#histology :selected").each(function () {
+            histologyArray.push($(this).val());
+        });
+
+        $("#grossDescription :selected").each(function () {
+            grossArray.push($(this).val());
+        });
+
+        tumor = new newTumor(histologyArray, grossArray);
+        //tumor.histology[0];
+        
         calculateProbabilities(tumor);
-       // alert(tumor.age);
+
+        //   alert(tumor.histology[0]);
+        // alert(tumor.histology[1]);
+
+        // alert(tumor.age);
+
+
+        //var selectedValues = [];    
+
+        // alert(histology [0]);
+        //return false;
+
+
+
+
+
 
     });
 
 });
 
-function newTumor () {
+function newTumor (histology, grossDescription) {
     this.gender = menus[0].value;
     this.race = menus[1].value;
     this.age = age.value;
@@ -225,8 +260,11 @@ function newTumor () {
     this.longSite = longBoneMenu[1].value;
     this.cOrM = longBoneMenu[2].value;
 
+    //gross description
+    this.grossDescription = grossDescription
     this.radiology = radiology.value;
-    this.histology = histology.value;
+    this.histology = histology;
+    //histology
     this.cohesiveness = cohesiveness.value;
     this.mitoticRate = mitoticRate.value;
     
@@ -237,10 +275,11 @@ function newTumor () {
 
 //alert (ewing.positiveStains[0])
 
- var tumorSet = [ewing, osteosarcoma, langerhansHistiocytosis, myeloma, lymphoma]
+ var tumorSet = []
 
  var calculateProbabilities = function (tumor) {
-
+     //alert(tumor.histology[0])
+     tumorSet = [ewing, osteosarcoma, langerhansHistiocytosis, myeloma, lymphoma]
      var tumorScore = [0, 0, 0, 0, 0];
      tumorOrder = [];
      // alert(tumorSet[0].name)
@@ -254,20 +293,46 @@ function newTumor () {
 
 
          if (tumor.age != "empty" && tumor.age > tumorSet[i].age[0] && tumor.age < tumorSet[i].age[1]) { tumorSet[i].score = tumorSet[i].score + 1; };
-         if (tumor.gender != "empty" && tumorSet[i].gender == "both" || tumor.gender == tumorSet[i].gender ) { tumorSet[i].score = tumorSet[i].score + 1; };
+         if (tumor.gender != "empty" && tumorSet[i].gender == "both" || tumor.gender == tumorSet[i].gender) { tumorSet[i].score = tumorSet[i].score + 1; };
          if (tumor.race != "empty" && tumorSet[i].race == "all" || inArray(tumorSet[i].race, tumor.race)) { tumorSet[i].score = tumorSet[i].score + 1; };
-         if (inArray(tumorSet[i].gross, tumor.gross)) { tumorSet[i].score = tumorSet[i].score + 1; };
+
+         //   if (inArray(tumorSet[i].gross, tumor.gross)) { tumorSet[i].score = tumorSet[i].score + 1; };
          //may want to have additional points if number one in list
 
-         if (inArray(tumorSet[i].radiology, tumor.radiology)) { tumorSet[i].score = tumorSet[i].score + 1; };
-         
+         if (inArray(tumorSet[i].radiology, tumor.radiology)) { 
+                if (inArray(tumorSet[i].buzzword, tumor.radiology)) {
+                     tumorSet[i].score = tumorSet[i].score + 200;
+                 };
+         tumorSet[i].score = tumorSet[i].score + 1; };
 
+         //inArray(tumorSet[i].histology,tumor.histology[0])
          //need to correct this
-         if (inArray(tumorSet[i].specificSite, tumor.specificLocation)) { tumorSet[i].score = tumorSet[i].score + 1; };
-         if (inArray(tumorSet[i].specificSite, tumor.longBoneAffected)) { tumorSet[i].score = tumorSet[i].score + 1; };
+         //  if (inArray(tumorSet[i].specificSite, tumor.specificLocation)) { tumorSet[i].score = tumorSet[i].score + 1; };
+         //  if (inArray(tumorSet[i].specificSite, tumor.longBoneAffected)) { tumorSet[i].score = tumorSet[i].score + 1; };
 
 
-         if (inArray(tumorSet[i].histology, tumor.histology)) { tumorSet[i].score = tumorSet[i].score + 1; };
+
+         for (var k = 0; k < tumor.histology.length; k++) {
+
+             if (inArray(tumorSet[i].histology, tumor.histology[k])) { tumorSet[i].score = tumorSet[i].score + 1; };
+                if (inArray(tumorSet[i].buzzword, tumor.histology[k])) {
+                     tumorSet[i].score = tumorSet[i].score + 200;
+                 };
+
+
+         };
+
+         for (var l = 0; l < tumor.grossDescription.length; l++) {
+
+             if (inArray(tumorSet[i].gross, tumor.grossDescription[l])) {
+                 tumorSet[i].score = tumorSet[i].score + 1;
+                 if (inArray(tumorSet[i].buzzword, tumor.grossDescription[l])) {
+                     tumorSet[i].score = tumorSet[i].score + 200;
+                 };
+             };
+
+         };
+
 
          //msort(tumorScore, 0, tumorScore.length);
          //if (tumor.gender == tumorSet[i].gender || tumorSet[i].gender=="both"){tumorScore[i]++;};
@@ -293,69 +358,89 @@ function newTumor () {
  };
 
 
-var inArray = function (myArray, myValue) {
-    for (var i = 0; i < myArray.length; i++) {
-        if (myArray[i] === myValue) {
-            return true;
-            i = myArray.length();
-        }
-        else {
-            return false;
-        }
+ var inArray = function (myArray, myValue) {
+     var found = false;
+     for (var f = 0; f < myArray.length; f++) {
+         //console.log(myArray[f])
 
-    }
+         // alert(myValue);
 
-}
+         if (myArray[f] == myValue) {
+             
+             return true;
 
-var printIHC = function (mySet, totals) {
-    var positives = [];
-    var negatives = [];
-    var variables = [];
+         }
+         else {
+             console.log("no")
+             found = false;
+         };
 
-    for (var j = 0; j < mySet.length; j++) {
+     };
+     return found;
+ }
 
-        for (var x = 0; x < mySet[j].positiveStains.length; x++) {
-            if (mySet[j].positiveStains[x] == undefined) {
-                mySet[j].positiveStains[x] = "N/A";
-            }
-            positives[x] = mySet[j].positiveStains[x] + " ";
 
-        }
-        for (var x = 0; x < mySet[j].negativeStains.length; x++) {
-            if (mySet[j].negativeStains[x] == undefined) {
-                mySet[j].negativeStains[x] = "N/A";
-            }
 
-            negatives[x] = mySet[j].negativeStains[x] + " ";
+ var printIHC = function (mySet, totals) {
+     var positives = [];
+     var negatives = [];
+     var variables = [];
 
-        }
-        for (var x = 0; x < mySet[j].variableStains.length; x++) {
-            if (mySet[j].variableStains[x] == undefined) {
-                mySet[j].variableStains[x] = "N/A";
-            }
+     for (var j = 0; j < mySet.length; j++) {
 
-            variables[x] = mySet[j].variableStains[x] + " ";
+         for (var x = 0; x < mySet[j].positiveStains.length; x++) {
+             if (mySet[j].positiveStains[x] == undefined) {
+                 mySet[j].positiveStains[x] = "N/A";
+             }
+             positives[x] = mySet[j].positiveStains[x] + " ";
 
-        }
-        //  $('#answerTable').append( '<tr><td>' + "oh yeah" + '</td>' '<td>' + "hi" '</td></tr>' );
-        //'mySet[0].name'
-        $('#answerTable tr:last').after('<tr> <td>' + mySet[j].name + '</td><td>' + positives + ' <td>' + negatives + '</td><td>' + variables + '</td><td>' + mySet[j].score + "/" + totals + '</td></tr>')
-        positives = [];
-        negatives = [];
-        variables = [];
-    }
+         }
+         for (var x = 0; x < mySet[j].negativeStains.length; x++) {
+             if (mySet[j].negativeStains[x] == undefined) {
+                 mySet[j].negativeStains[x] = "N/A";
+             }
 
-}
+             negatives[x] = mySet[j].negativeStains[x] + " ";
+
+         }
+         for (var x = 0; x < mySet[j].variableStains.length; x++) {
+             if (mySet[j].variableStains[x] == undefined) {
+                 mySet[j].variableStains[x] = "N/A";
+             }
+
+             variables[x] = mySet[j].variableStains[x] + " ";
+
+         }
+         //  $('#answerTable').append( '<tr><td>' + "oh yeah" + '</td>' '<td>' + "hi" '</td></tr>' );
+         //'mySet[0].name'
+         if (mySet[j].score > 100) { mySet[j].score = "**" };
+         $('#answerTable tr:last').after('<tr> <td>' + mySet[j].name + '</td><td>' + positives + ' <td>' + negatives + '</td><td>' + variables + '</td><td>' + mySet[j].score + "/" + totals + '</td></tr>')
+         positives = [];
+         negatives = [];
+         variables = [];
+     }
+
+ }
 
 var totalScore = function (tumor) {
     var total = 0;
     $.each(tumor, function (key, element) {
+
         if (element != undefined && element != "none" && element != "empty" && element != "") {
-            if (key == histology || key == grossDescription) {
-                // alert (key + " " + element)
-                for (var i = 0; i < key.length; i++) {
-                    total = total + 1;
-                } 
+
+            //grossdescription   || key == grossDescription
+
+            if (key == "histology") {
+                //alert (key + " " + element)
+                var add = histologyArray.length;
+                //alert(histologyArray[i])
+
+                total = total + add;
+
+            }
+            else if (key == "grossDescription") {
+                var add = grossArray.length;
+                total = total + add;
             }
             else {
                 total = total + 1;
