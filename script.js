@@ -7,6 +7,7 @@ var age = document.getElementById("age");
 
 var STorBone =  document.getElementById("STorBone")
 var axialOrappendicular = document.getElementById("axialOrappendicular");
+
 var axialSelected = document.getElementById("axialSelected");
 var appendicularLocation = document.getElementById("appendicularLocation");
 
@@ -26,7 +27,7 @@ var cohesiveness = document.getElementById("cohesiveness");
 var mitoticRate = document.getElementById("mitoticRate");
 
 var confirm = document.getElementById("confirmEntry");
-
+var reset = document.getElementById("reset");
 //var selectedHistology = [];
 var histologyArray = [];
 var grossArray = [];
@@ -133,7 +134,7 @@ var myeloma = {
     mitoses: "rare",
     cohesiveness: "discohesive",
     buzzword: [],
-    removeDiagnosis: ["age"],
+    removeDiagnosis: [30],
     score: 0
 }
 
@@ -240,6 +241,8 @@ $(document).ready(function () {
 
 
     });
+    $("#reset").click(function(){location.reload(true);})
+
 
 });
 
