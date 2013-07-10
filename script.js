@@ -11,6 +11,7 @@ var axialOrappendicular = document.getElementById("axialOrappendicular");
 var axialSelected = document.getElementById("axialSelected");
 var appendicularLocation = document.getElementById("appendicularLocation");
 
+var stSite = document.getElementById("softtissueSite");
 var specificLocation = document.getElementsByName("longBoneMenu");
 var locationTumor = document.getElementById("locationTumor");
 
@@ -162,6 +163,54 @@ var lymphoma = {
     score: 0
 }
 
+var rhabdomyosarcoma = {
+    
+    name: "Rhabdomyosarcoma",
+    positiveStains: ["SNF5 - 100%", "Desmin - 94%", "Vimentin - 94%", "CD56 - 93%", "Myogenin - 90%"],
+    negativeStains: ["FLI-1 - 2%", "HMB45 - 0%", "CD45 - 0%", "GFAP - 0%"],
+    variableStains: ["CD10 - 42%", "NSE - 37%", "AE1/3 - 20%", "CD99 - 17%"],
+   
+    age: [0,15],
+    race: ["white"],
+    gender: "male",
+    tumorLocation: ["longBone","axial"],
+    specificSite: ["headAndneck"],
+    boneLocation: [],
+    cORm : "",
+    radiology: [],
+    gross: ["fleshy", "tan", "poorlyDefined"],
+    histology: ["spindleCells", "rhabdoid", "mucoid", "pleomorphic"],
+    mitoses: "variable",
+    cohesiveness: "variable",
+    buzzword: [],
+    removeDiagnosis: [],
+    score: 0
+}
+
+var neuroblastoma = {
+    
+    name: "Neuroblastoma",
+    positiveStains: ["CD56 - 99%", "Neuroblastoma - 99%", "NSE - 82%", "Synaptophysin - 76%", "Vimentin - 67%"],
+    negativeStains: ["GFAP- 4%", "AE1/AE3 - 0%", "CD99 - 0%"],
+    variableStains: ["Chromagranin A - 60%", "S100 - 31%"],
+   
+    age: ["0, 4"],
+    race: ["all"],
+    gender: "both",
+    tumorLocation: ["axial"],
+    specificSite: ["skull"],
+    boneLocation: [],
+    cORm : "",
+    radiology: [],
+    gross: ["soft", "gray", "necrotic"],
+    histology: ["necrosis", "rosettes", "calcification", "chicken-wire"],
+    mitoses: "variable",
+    cohesiveness: "variable",
+    buzzword: [],
+    removeDiagnosis: [],
+    score: 0
+}
+
 $(document).ready(function () {
     $('#STorBone').change(function () {
         var orgType = $("#STorBone").val()
@@ -260,7 +309,7 @@ function newTumor (histology, grossDescription) {
 
     this.axialSelected = axialSelected.value;
     this.specificLocation = specificLocation.value;
-
+    this.stSite = stSite;
     this.longBoneAffected = longBoneMenu[0].value;
     this.longSite = longBoneMenu[1].value;
     this.cOrM = longBoneMenu[2].value;
@@ -284,8 +333,8 @@ function newTumor (histology, grossDescription) {
 
  var calculateProbabilities = function (tumor) {
      //alert(tumor.histology[0])
-     tumorSet = [ewing, osteosarcoma, langerhansHistiocytosis, myeloma, lymphoma]
-     var tumorScore = [0, 0, 0, 0, 0];
+     tumorSet = [ewing, osteosarcoma, langerhansHistiocytosis, myeloma, lymphoma, rhabdomyosarcoma, neuroblastoma]
+     //var tumorScore = [0, 0, 0, 0, 0];
      tumorOrder = [];
      // alert(tumorSet[0].name)
      //alert(tumorScore[0]+ 1)
@@ -314,9 +363,9 @@ function newTumor (histology, grossDescription) {
 
          //inArray(tumorSet[i].histology,tumor.histology[0])
          //need to correct this
-         //  if (inArray(tumorSet[i].specificSite, tumor.specificLocation)) { tumorSet[i].score = tumorSet[i].score + 1; };
-         //  if (inArray(tumorSet[i].specificSite, tumor.longBoneAffected)) { tumorSet[i].score = tumorSet[i].score + 1; };
-
+           if (inArray(tumorSet[i].specificSite, tumor.specificLocation)) { tumorSet[i].score = tumorSet[i].score + 1; };
+           if (inArray(tumorSet[i].specificSite, tumor.longBoneAffected)) { tumorSet[i].score = tumorSet[i].score + 1; };
+           if (inArray(tumorSet[i].specificSite, tumor.stSite)) { tumorSet[i].score = tumorSet[i].score + 1; };
 
 
          for (var k = 0; k < tumor.histology.length; k++) {
