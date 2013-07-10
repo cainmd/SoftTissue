@@ -219,16 +219,19 @@ $(document).ready(function () {
             grossArray.push($(this).val());
         });
 
+        //var rowCount = document.getElementById('answerTable').rows.length;
+        //if (rowCount > 2) { location.reload(true); };
+
         tumor = new newTumor(histologyArray, grossArray);
         //tumor.histology[0];
-        
+
         calculateProbabilities(tumor);
 
         //   alert(tumor.histology[0]);
         // alert(tumor.histology[1]);
 
         // alert(tumor.age);
-
+        confirm.style.visibility = "hidden";
 
         //var selectedValues = [];    
 
@@ -241,7 +244,7 @@ $(document).ready(function () {
 
 
     });
-    $("#reset").click(function(){location.reload(true);})
+    $("#reset").click(function () { location.reload(true); })
 
 
 });
