@@ -7,7 +7,6 @@ var age = document.getElementById("age");
 
 var STorBone =  document.getElementById("STorBone")
 var axialOrappendicular = document.getElementById("axialOrappendicular");
-
 var axialSelected = document.getElementById("axialSelected");
 var appendicularLocation = document.getElementById("appendicularLocation");
 
@@ -108,7 +107,7 @@ var langerhansHistiocytosis = {
     histology: ["eosinophils", "macrophages", "lymphocytes", "necrosis"],
     mitoses: "variable",
     cohesiveness: "variable",
-    buzzword: ["eosinophils"],
+    buzzword: [],
     removeDiagnosis: [],
     score: 0
 
